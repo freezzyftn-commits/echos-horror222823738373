@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08090d">
+<title>ÉCHOS — Ne réponds pas.</title>
+<style>
+:root{--bg:#08090d;--panel:#11131b;--line:#2b2d3a;--text:#e9e9ef;--muted:#9a9caf;--red:#e14d5a;--glow:#8b1727}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0%,#1b1018 0%,var(--bg) 52%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer} .wrap{width:min(760px,100%);margin:auto;padding:20px 16px 36px;min-height:100dvh;display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+.pip{display:inline-block;width:7px;height:7px;background:var(--red);border-radius:50%;margin-right:7px;box-shadow:0 0 12px var(--red)}
+.hero{text-align:center;padding:32px 0 22px}.eyebrow{color:var(--red);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase}
+h1{font-size:clamp(2.8rem,12vw,5.8rem);letter-spacing:.14em;margin:5px 0 0;font-weight:900;line-height:1;text-shadow:0 0 28px #7d152b66}
+.tag{color:#b7b8c7;font-size:.92rem;letter-spacing:.08em;margin-top:12px}
+.scene{position:relative;overflow:hidden;border:1px solid #3b2732;border-radius:14px;min-height:180px;background:linear-gradient(180deg,#12111b,#08090d);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.scene:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,#ffffff05 4px);pointer-events:none}
+.moon{position:absolute;width:62px;height:62px;border-radius:50%;background:#c3c0cb;top:22px;right:15%;opacity:.75;box-shadow:0 0 45px #bcb4d055}
+.house{position:absolute;bottom:0;width:180px;height:125px;background:#15131b;clip-path:polygon(50% 0,100% 38%,90% 38%,90% 100%,10% 100%,10% 38%,0 38%);filter:drop-shadow(0 0 20px #000)}
+.door{position:absolute;bottom:0;width:33px;height:62px;background:#050509;border:1px solid #29232e}
+.window{position:absolute;bottom:58px;width:24px;height:24px;background:#a53c48;box-shadow:0 0 20px #a53c48;opacity:.6}
+.scene-label{position:absolute;bottom:12px;left:14px;color:#a4a3b4;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
+.status{display:flex;gap:8px;margin-bottom:12px}.chip{border:1px solid var(--line);background:#0d0e14;padding:7px 10px;border-radius:8px;color:var(--muted);font-size:.75rem;flex:1;text-align:center}.chip b{color:var(--text);font-weight:650}
+.card{background:linear-gradient(145deg,#13151d,#0d0e14);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:12px;box-shadow:0 12px 32px #0004}
+.chapter{font-size:.7rem;color:var(--red);letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
+.story{font-size:1.02rem;line-height:1.75;white-space:pre-line}.story strong{color:#fff}
+.choices{display:grid;gap:9px;margin-top:18px}.choice{width:100%;text-align:left;background:#191b25;border:1px solid #333544;border-radius:10px;color:var(--text);padding:14px 15px;transition:transform .12s,border-color .12s,background .12s}.choice:active{transform:scale(.985)}.choice:hover{border-color:#94404b;background:#20151d}.choice span{color:var(--red);font-weight:800;margin-right:10px}
+.tools{display:flex;gap:8px;margin:0 0 12px}.small{flex:1;background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:10px;font-size:.8rem}.small:active{background:#171821}
+.footer{text-align:center;color:#646678;font-size:.72rem;line-height:1.6;margin-top:auto;padding-top:20px}
+.overlay{position:fixed;inset:0;background:#030307ed;z-index:5;display:none;align-items:center;justify-content:center;padding:20px}.overlay.show{display:flex}.scare{max-width:450px;text-align:center;animation:shake .16s 5}.scare .face{font-size:clamp(5rem,30vw,10rem);color:#b81e37;text-shadow:0 0 35px #f00;line-height:1}.scare h2{letter-spacing:.15em}.scare p{color:#c0c0ca;line-height:1.6}.scare button{background:#8f1d31;color:white;border:0;border-radius:8px;padding:12px 20px}
+@keyframes shake{0%,100%{transform:translate(0)}25%{transform:translate(4px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,3px)}}
+@media(min-width:600px){.wrap{padding-top:28px}.hero{padding:42px 0 26px}.scene{min-height:230px}.card{padding:25px}.story{font-size:1.08rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span><i class="pip"></i>Expérience interactive</span><span id="save-label">Autosauvegarde</span></div>
+  <header class="hero"><div class="eyebrow">Une histoire d'horreur</div><h1>ÉCHOS</h1><div class="tag">NE RÉPONDS PAS.</div></header>
+  <div class="scene" aria-label="Une maison isolée dans la nuit">
+    <div class="moon"></div><div class="house"></div><div class="door"></div><div class="window" style="left:calc(50% - 55px)"></div><div class="window" style="left:calc(50% + 28px);bottom:58px;background:#452b4e;box-shadow:0 0 18px #71457d"></div>
+    <div class="scene-label" id="scene-label">Forêt de Valombre · 02:13</div>
+  </div>
+  <div class="status"><div class="chip">Nerfs : <b id="nerve">100%</b></div><div class="chip">Objets : <b id="items">0</b></div><div class="chip">Fin : <b id="ending">inconnue</b></div></div>
+  <div class="tools"><button class="small" id="sound">♫ Activer l'ambiance</button><button class="small" id="restart">↻ Recommencer</button></div>
+  <main class="card">
+    <div class="chapter" id="chapter">Prologue · La route</div>
+    <div class="story" id="story"></div>
+    <div class="choices" id="choices"></div>
+  </main>
+  <div class="footer">Joue au casque et dans le noir… si tu l'oses.<br>Conseil : chaque décision compte. Certaines portes ne se rouvrent jamais.</div>
+</div>
+<div class="overlay" id="overlay"><div class="scare"><div class="face">◉</div><h2>IL T'A ENTENDU.</h2><p id="scare-text">Tu n'aurais pas dû faire ça.</p><button id="close-scare">Continuer…</button></div></div>
+<script>
+const scenes = {
+start:{chapter:"Prologue · La route",label:"Forêt de Valombre · 02:13",text:"La pluie frappe le pare-brise. Ton téléphone affiche <strong>aucun réseau</strong>. Tu devais arriver chez ton ami depuis une heure, mais le GPS t'a conduit jusqu'à cette maison abandonnée.\\n\\nPuis ton téléphone vibre. Un message d'un numéro inconnu : <strong>« Ne rentre pas. Je suis déjà à l'intérieur. »</strong>\\n\\nAu même instant, une lumière s'allume à l'étage.",choices:[["T'approcher de la porte d'entrée","door"],["Faire le tour de la maison","side"],["Répondre au numéro inconnu","text"]]},
+door:{chapter:"Chapitre I · Le seuil",label:"Maison · Entrée",text:"La porte est entrouverte. L'air sent la poussière et la terre mouillée. Sur le mur, quelqu'un a gravé des dizaines de traits… et ton prénom.\\n\\nÀ l'étage, un plancher grince. Puis une voix murmure : « Tu as mis du temps. »",choices:[["Entrer et refermer doucement","hall"],["Reculer et courir vers la route","road"],["Crier : « Qui est là ? »","shout"]]},
+side:{chapter:"Chapitre I · Derrière la maison",label:"Maison · Jardin",text:"Tu longes le mur. Dans la boue, des empreintes font le tour de la maison. Elles sont toutes nues… et toutes orientées vers toi.\\n\\nUne trappe mène à la cave. Derrière toi, la porte d'entrée claque, bien que tu sois certain de ne pas l'avoir touchée.",choices:[["Descendre dans la cave","basement"],["Forcer la fenêtre de la cuisine","kitchen"],["Examiner les empreintes","prints"]]},
+text:{chapter:"Chapitre I · Le message",label:"Forêt · Aucun réseau",text:"Tu écris : « Qui êtes-vous ? » La réponse arrive instantanément.\\n\\n<strong>« Regarde derrière toi. »</strong>\\n\\nDans le rétroviseur, une silhouette est assise sur la banquette arrière. Tu te retournes : personne. Quand tu regardes à nouveau, le téléphone affiche une photo de toi… prise depuis l'intérieur de la maison.",choices:[["Jeter le téléphone et entrer","hall"],["Verrouiller les portes de la voiture","car"],["Demander qui a pris la photo","voice"]]},
+hall:{chapter:"Chapitre II · Les murs",label:"Maison · Couloir",text:"La porte se referme toute seule. Un vieux téléphone fixe sonne au bout du couloir. À côté, un trousseau de clés et une lampe torche sont posés sur une commode.\\n\\nDans le combiné, une respiration lente. Puis ta propre voix, mais plus âgée : « Quoi que tu fasses, ne monte pas. »",choices:[["Prendre la lampe et les clés","items"],["Décrocher le téléphone","phone"],["Monter malgré l'avertissement","up"]]},
+road:{chapter:"Chapitre II · La route",label:"Forêt · Route barrée",text:"Tu cours jusqu'à la route. Elle devrait être à vingt mètres. Pourtant, tu retrouves la même boîte aux lettres, encore et encore. Sur chacune, ton nom est écrit.\\n\\nUne silhouette se tient au milieu du chemin. Elle a ton manteau. Elle lève lentement la main pour te faire signe.",choices:[["Lui parler","double"],["Retourner à la maison","hall"],["Fermer les yeux et avancer","dark"]]},
+shout:{chapter:"Chapitre II · La réponse",label:"Maison · Entrée",text:"« Qui est là ? »\\n\\nLe silence dure trois secondes. Puis toutes les portes de la maison s'ouvrent en même temps. Une voix répond depuis chaque pièce : « TOI. »\\n\\nLa porte de la cave est la seule qui reste fermée.",choices:[["Ouvrir la porte de la cave","basement"],["Se cacher dans un placard","closet"],["Fuir par la porte d'entrée","road"]]},
+basement:{chapter:"Chapitre II · Sous la maison",label:"Cave · Sous-sol",text:"L'escalier descend beaucoup trop longtemps. En bas, tu découvres une pièce remplie de téléphones. Ils sonnent tous. Sur une table, un carnet indique : <strong>« Il imite la dernière personne qui lui a répondu. »</strong>\\n\\nUn téléphone sonne derrière une porte métallique.",choices:[["Lire les dernières pages du carnet","diary"],["Ouvrir la porte métallique","metal"],["Remonter sans bruit","hall"]]},
+kitchen:{chapter:"Chapitre II · La cuisine",label:"Maison · Cuisine",text:"Tu passes par la fenêtre et atterris dans la cuisine. Un vieux poste radio grésille. Une voix annonce la date d'aujourd'hui… puis ajoute : « Enzo est entré dans la maison à 02:13. »\\n\\nLa radio se coupe. Tu entends trois coups à la porte de la cuisine.",choices:[["Te cacher sous la table","hide"],["Prendre un couteau et ouvrir","knife"],["Sortir par la fenêtre","road"]]},
+prints:{chapter:"Chapitre II · Les traces",label:"Jardin · Boue",text:"Tu t'accroupis. Les empreintes s'arrêtent net devant tes chaussures. Une nouvelle empreinte apparaît dans la boue, juste à côté de la tienne. Puis une autre. Quelque chose marche à tes côtés, sans être visible.\\n\\nUne clé froide tombe dans ta main.",choices:[["Garder la clé et entrer","hall"],["Courir vers la route","road"],["Laisser la clé et suivre les traces","woods"]]},
+car:{chapter:"Chapitre II · Habitacle",label:"Voiture · Verrouillée",text:"Les portières se verrouillent. Le moteur démarre sans clé. Sur l'écran du tableau de bord, une phrase apparaît : <strong>« Tu as oublié quelqu'un. »</strong>\\n\\nLa radio diffuse un enregistrement de ta propre voix, qui supplie qu'on lui ouvre.",choices:[["Couper le moteur","engine"],["Répondre à la voix","voice"],["Sortir de la voiture","road"]]},
+voice:{chapter:"Chapitre II · La voix",label:"Silence · Puis un souffle",text:"Tu demandes qui a pris la photo. Le haut-parleur grésille. « Quelqu'un qui veut sortir. »\\n\\nLa voix connaît le prénom de ton ami, le code de ton téléphone et un souvenir que tu n'as raconté à personne. Puis elle chuchote : « Je peux prendre ta place. »",choices:[["Lui demander ce qu'il veut","deal"],["Éteindre le téléphone","hall"],["Lui dire de venir te chercher","bad"]]},
+items:{chapter:"Chapitre III · Le matériel",label:"Maison · Couloir",text:"Tu prends la lampe torche et les clés. La lampe éclaire des marques sur le parquet : elles forment une flèche vers une petite porte sous l'escalier. Une clé porte l'étiquette <strong>« SORTIE »</strong>.\\n\\nÀ l'étage, des pas descendent lentement. Tu as peu de temps.",give:["Lampe torche","Clés"],choices:[["Ouvrir la petite porte","escape"],["Te cacher dans le placard","closet"],["Monter voir qui descend","up"]]},
+phone:{chapter:"Chapitre III · Décrocher",label:"Maison · Téléphone fixe",text:"Tu portes le combiné à ton oreille. À l'autre bout, tu entends ta respiration… avec une seconde de retard.\\n\\n« Je suis dans le mur », dit la voix. « Et je commence à avoir faim. » Une petite trappe s'ouvre dans le mur, à hauteur de tes yeux.",choices:[["Regarder dans la trappe","wall"],["Raccrocher et courir","road"],["Demander son nom","bad"]]},
+up:{chapter:"Chapitre III · L'étage",label:"Maison · Escalier",text:"Chaque marche gémit sous ton poids. Au bout du couloir, une chambre est éclairée. Sur le lit, quelqu'un est assis dos à toi. Il porte tes vêtements.\\n\\nSans se retourner, il dit : « Tu peux rentrer chez toi maintenant. Je vais rester ici. »",choices:[["Accepter et redescendre","hall"],["Lui demander de se retourner","double"],["Entrer dans la chambre","room"]]},
+closet:{chapter:"Chapitre III · La cachette",label:"Maison · Placard",text:"Tu te glisses dans le placard et retiens ton souffle. Des pas s'arrêtent juste devant la porte. Quelque chose renifle l'air.\\n\\nUne voix d'enfant chuchote : « Je sais que tu es là. Mais je ne suis pas lui. » Une petite main passe sous la porte et dépose une clé.",choices:[["Prendre la clé","escape"],["Ouvrir le placard","child"],["Attendre que les pas s'éloignent","wait"]]},
+diary:{chapter:"Chapitre III · Le carnet",label:"Cave · La table",text:"Les pages racontent la même nuit, encore et encore. Chaque personne qui entre finit par répondre à une voix. La dernière page porte une écriture fraîche : <strong>« Pour sortir, il faut qu'il prononce ton nom. Ne lui donne jamais le tien. »</strong>\\n\\nDerrière toi, tous les téléphones se taisent en même temps.",choices:[["Emporter le carnet","metal"],["Remonter en silence","hall"],["Appeler à l'aide","bad"]]},
+metal:{chapter:"Chapitre IV · La porte",label:"Cave · Porte métallique",text:"La porte s'ouvre sur une pièce identique à l'entrée de la maison. Même pluie, même porte, même téléphone. Mais sur le mur, une phrase est écrite en lettres fraîches : <strong>« IL EST DÉJÀ DEHORS. »</strong>\\n\\nQuelqu'un frappe à la porte depuis l'autre côté.",choices:[["Ouvrir la porte","double"],["Chercher une autre sortie","escape"],["Se cacher derrière les étagères","hide"]]},
+hide:{chapter:"Chapitre IV · Ne bouge pas",label:"Maison · Obscurité",text:"Tu te caches. Les coups cessent. Dans le noir, tu entends une respiration tout près de ton oreille.\\n\\n« Bien joué », murmure une voix. « Maintenant, on peut jouer. » La lampe de la cuisine s'allume toute seule.",choices:[["Sortir en courant","road"],["Rester parfaitement immobile","wait"],["Allumer la lumière","bad"]]},
+knife:{chapter:"Chapitre IV · Mauvaise idée",label:"Cuisine · Face à la porte",text:"Tu ouvres la porte. Le couloir est vide. Au sol, une photo montre la cuisine, prise depuis le plafond. Au dos : « Il ne faut pas le blesser. Il faut lui rappeler. »\\n\\nQuelque chose verrouille la porte derrière toi.",choices:[["Chercher un souvenir dans la maison","memory"],["Forcer la porte","bad"],["Passer par la fenêtre","road"]]},
+woods:{chapter:"Chapitre IV · Entre les arbres",label:"Forêt · Hors du sentier",text:"Tu suis les empreintes jusqu'à une clairière. Un vieux magnétophone est posé sur une souche. Il contient un enregistrement : quelqu'un qui rit, puis une voix qui dit « Je t'attendrai ». C'est étrangement familier.\\n\\nLe magnétophone possède un bouton rouge : LIRE À L'ENVERS.",choices:[["Écouter normalement","memory"],["Lire à l'envers","reveal"],["Détruire le magnétophone","bad"]]},
+engine:{chapter:"Chapitre IV · Le moteur",label:"Voiture · Compte à rebours",text:"Le moteur s'éteint. Le silence est si profond que tes oreilles sifflent. Sur le pare-brise, la buée dessine des mots de l'intérieur : <strong>« TU AS UNE DERNIÈRE CHANCE. »</strong>\\n\\nLa portière passager s'ouvre toute seule.",choices:[["Sortir côté conducteur","road"],["Regarder sur le siège passager","double"],["Démarrer à nouveau","bad"]]},
+deal:{chapter:"Chapitre IV · Le marché",label:"Téléphone · Ligne ouverte",text:"« Je veux juste une voix », répond la chose. « Une seule réponse, et je pourrai partir. »\\n\\nTu comprends enfin : la maison ne retient pas les corps. Elle retient les voix. Le silence pourrait être ta seule chance.",choices:[["Raccrocher sans un mot","reveal"],["Lui donner ton prénom","bad"],["Lui demander de répéter","bad"]]},
+wall:{chapter:"Chapitre IV · Dans le mur",label:"Maison · Petite trappe",text:"Derrière la trappe, tu ne vois qu'un œil qui cligne lentement. Une voix d'enfant dit : « La sortie est sous l'escalier. Mais il faut retrouver le souvenir. »\\n\\nLa trappe se referme. Dans le couloir, une photo vient de tomber du mur.",choices:[["Ramasser la photo","memory"],["Ouvrir la trappe de force","bad"],["Partir sans la photo","escape"]]},
+child:{chapter:"Chapitre IV · L'enfant",label:"Maison · Placard",text:"Tu ouvres la porte. Une petite silhouette se tient au bout du couloir, le visage caché par l'ombre. « Je suis la dernière personne qui a vécu ici », dit-elle. « Il n'est pas un monstre. Il a oublié qui il était. »\\n\\nElle te tend une photo déchirée.",choices:[["Prendre la photo","memory"],["La suivre dans l'escalier","escape"],["Lui demander son visage","bad"]]},
+wait:{chapter:"Chapitre IV · Le silence",label:"Maison · Immobilité",text:"Tu ne bouges plus. Les secondes passent. Puis les pas s'éloignent. Une porte claque, et une clé glisse sous la porte.\\n\\nSur la clé, un petit ruban porte ces mots : « Le souvenir ». ",choices:[["Prendre la clé","memory"],["Sortir immédiatement","escape"],["Rester caché encore","bad"]]},
+room:{chapter:"Chapitre IV · La chambre",label:"Maison · Chambre",text:"La personne se retourne. C'est toi, mais avec des yeux fatigués et des cheveux gris. « Tu es revenu, dit-elle. Tu reviens toujours. »\\n\\nElle te montre une photo : deux enfants devant cette maison. L'un d'eux te ressemble exactement.",choices:[["Prendre la photo","memory"],["Lui demander ce qui s'est passé","reveal"],["Fermer les yeux et reculer","bad"]]},
+memory:{chapter:"Chapitre V · Le souvenir",label:"Maison · Le passé",text:"La photo montre deux enfants qui se tiennent la main devant la maison. Au dos, une phrase : <strong>« Tu m'avais promis de ne jamais me laisser seul. »</strong>\\n\\nTout revient par fragments : cette maison n'est pas hantée par un inconnu. Elle est hantée par une promesse oubliée. Une voix demande doucement : « Tu te souviens de moi ? »",give:["Photo déchirée"],choices:[["Dire : « Je me souviens. »","reveal"],["Rester silencieux et chercher la sortie","escape"],["Dire que tu ne connais personne","bad"]]},
+reveal:{chapter:"Chapitre VI · La vérité",label:"Maison · 02:13",text:"Tu comprends enfin le piège. La chose ne veut pas ton corps. Elle veut que quelqu'un se souvienne d'elle. Les murs tremblent, et les voix se taisent.\\n\\nUne porte apparaît là où il n'y avait qu'un mur. Derrière, l'air sent la pluie fraîche. Mais une dernière question résonne : « Si tu sors, qui restera avec moi ? »",choices:[["Promettre de revenir, puis sortir","good"],["Lui demander de venir avec toi","best"],["Ne rien promettre et partir","neutral"]]},
+escape:{chapter:"Chapitre VI · La sortie",label:"Sous l'escalier · Porte de service",text:"La clé tourne. Derrière la porte, un escalier remonte vers la forêt. Tu entends la chose courir dans le couloir, puis s'arrêter juste derrière toi.\\n\\n« Attends… tu te souviens de moi ? » La poignée commence à tourner.",choices:[["Te retourner et écouter","reveal"],["Sortir et verrouiller derrière toi","neutral"],["Répondre « oui » sans te retourner","good"]]},
+good:{end:"good",chapter:"FIN · La promesse",label:"Forêt · 02:14",text:"Tu prononces les mots que tu avais oubliés. Le silence se brise comme une vitre invisible. La maison s'éteint derrière toi, fenêtre après fenêtre.\\n\\nÀ l'aube, tu retrouves la route. Ton téléphone capte enfin. Un dernier message apparaît : <strong>« Merci de ne pas m'avoir oublié. »</strong>\\n\\n<strong>FIN : LA PROMESSE</strong>",choices:[["Rejouer","start"]]},
+best:{end:"best",chapter:"FIN SECRÈTE · Deux ombres",label:"La maison · Puis le matin",text:"« Viens avec moi. »\\n\\nPour la première fois, la chose prend une forme humaine. Un enfant, tremblant, serre la photo contre lui. Vous franchissez la porte ensemble. Quand tu te retournes, la maison n'est plus là.\\n\\nSur la photo, vos deux visages sont enfin nets. Tu n'as pas seulement survécu : tu as libéré ce qui était prisonnier.\\n\\n<strong>FIN SECRÈTE : DEUX OMBRES</strong>",choices:[["Rejouer pour découvrir les autres fins","start"]]},
+neutral:{end:"neutral",chapter:"FIN · Le silence",label:"Route · 02:14",text:"Tu cours sans te retourner. Derrière toi, la maison disparaît dans le brouillard. Tu es libre… du moins, c'est ce que tu crois.\\n\\nDans le bus du lendemain, ton téléphone vibre. Un nouveau message : <strong>« Tu as oublié quelque chose. »</strong>\\n\\n<strong>FIN : LE SILENCE</strong>",choices:[["Rejouer","start"]]},
+bad:{end:"bad",chapter:"FIN · La voix",label:"Maison · Heure inconnue",text:"Tu réponds. Une seule fois. Le silence avale le bruit de la pluie.\\n\\nLe lendemain, la maison est vide. Sur le téléphone posé dans l'entrée, un nouveau message est prêt à être envoyé : « Ne rentre pas. Je suis déjà à l'intérieur. »\\n\\n<strong>FIN : LA VOIX</strong>",choices:[["Rejouer et tenter de survivre","start"]]},
+double:{chapter:"Chapitre V · Le double",label:"Maison · Le reflet",text:"La silhouette s'approche. C'est ton reflet, mais il sourit une seconde trop tard. « Tu peux partir », dit-il. « Mais il faut que l'un de nous reste. »\\n\\nDerrière lui, tu aperçois une photo déchirée et une porte entrouverte.",choices:[["Prendre la photo","memory"],["Passer la porte","escape"],["Lui demander pourquoi","bad"]]}
+};
+let state={scene:"start",items:[],nerve:100,seenEnd:"inconnue",sound:false};
+let audioCtx=null,osc=null,gain=null;
+function save(){try{localStorage.setItem("echos-save",JSON.stringify(state));document.getElementById("save-label").textContent="Partie sauvegardée"}catch(e){}}
+function render(){
+ const s=scenes[state.scene]||scenes.start;
+ document.getElementById("chapter").textContent=s.chapter;
+ document.getElementById("scene-label").textContent=s.label||"Maison · Nuit";
+ document.getElementById("story").innerHTML=s.text.replaceAll("\\n","<br>");
+ document.getElementById("nerve").textContent=state.nerve+"%";
+ document.getElementById("items").textContent=state.items.length;
+ document.getElementById("ending").textContent=s.end?({"good":"promesse","best":"secrète","neutral":"silence","bad":"voix"}[s.end]):state.seenEnd;
+ const choices=document.getElementById("choices");choices.innerHTML="";
+ (s.choices||[]).forEach((c,i)=>{const b=document.createElement("button");b.className="choice";b.innerHTML='<span>0'+(i+1)+'</span>'+c[0];b.onclick=()=>go(c[1]);choices.appendChild(b)});
+ if(s.end){state.seenEnd=({"good":"promesse","best":"secrète","neutral":"silence","bad":"voix"}[s.end]);state.nerve=Math.max(0,state.nerve-5);save()}
+ save();
+}
+function go(id){
+ if(id==="start"){state={scene:"start",items:[],nerve:100,seenEnd:"inconnue",sound:state.sound};render();return}
+ const old=state.scene;state.scene=id;
+ const s=scenes[id];if(s&&s.give)s.give.forEach(x=>{if(!state.items.includes(x))state.items.push(x)});
+ if(["bad","double","up","closet","basement","metal","hide"].includes(id))state.nerve=Math.max(10,state.nerve-8);
+ if(["bad","double"].includes(id)){document.getElementById("scare-text").textContent=id==="bad"?"Une voix vient de répondre à ta place.":"Quelque chose porte ton visage.";document.getElementById("overlay").classList.add("show");}
+ render();
+}
+document.getElementById("close-scare").onclick=()=>document.getElementById("overlay").classList.remove("show");
+document.getElementById("restart").onclick=()=>{if(confirm("Recommencer l'histoire depuis le début ?"))go("start")};
+document.getElementById("sound").onclick=()=>{
+ state.sound=!state.sound;
+ const btn=document.getElementById("sound");
+ if(state.sound){
+  try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();osc=audioCtx.createOscillator();gain=audioCtx.createGain();osc.type="sine";osc.frequency.value=48;gain.gain.value=.018;osc.connect(gain);gain.connect(audioCtx.destination);osc.start();btn.textContent="♫ Couper l'ambiance";}
+  catch(e){btn.textContent="Son indisponible";}
+ }else{if(osc){try{osc.stop()}catch(e){}osc=null}btn.textContent="♫ Activer l'ambiance"}
+ save();
+};
+try{const saved=localStorage.getItem("echos-save");if(saved){const parsed=JSON.parse(saved);if(parsed&&scenes[parsed.scene])state=parsed}}catch(e){}
+render();
+</script>
+</body>
+</html>
